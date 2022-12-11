@@ -1,13 +1,9 @@
 package org.example.dao;
 
+import org.example.dao.generic.IGenericDAO;
 import org.example.domain.Cliente;
 
-public interface IClienteDAO {
-    Boolean salvar(Cliente cliente);
+public interface IClienteDAO extends IGenericDAO<Cliente, Long> {
 
-    Cliente buscarPorCPF(Long cpf);
 
-    void excluir(Long cpf);
-
-    void alterar(Cliente cliente);
 }

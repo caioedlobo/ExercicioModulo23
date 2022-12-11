@@ -3,6 +3,7 @@ package org.example;
 import org.example.dao.ClienteDaoMock;
 import org.example.dao.IClienteDAO;
 import org.example.domain.Cliente;
+import org.example.exceptions.TipoChaveNaoEncontradaException;
 import org.example.service.ClienteService;
 import org.example.service.IClienteService;
 import org.junit.Assert;
@@ -10,43 +11,52 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ClienteServiceTest {
-    private IClienteDAO dao = new ClienteDaoMock();
-    private IClienteService clienteService = new ClienteService(dao);
-    //public ClienteTest(){     //outra forma de instanciar
-        //clienteService = new ClienteService();
-    //}
+
+    private IClienteService clienteService;
+
     private Cliente cliente;
-    @Before        //ele é executado antes de cada teste
-    public void init(){
+
+    public ClienteServiceTest() {
+        IClienteDAO dao = new ClienteDaoMock();
+        clienteService = new ClienteService(dao);
+    }
+
+    @Before
+    public void init() {
         cliente = new Cliente();
         cliente.setCpf(12312312312L);
-        cliente.setNome("Caio");
-        cliente.setCidade("VDC");
+        cliente.setNome("Rodrigo");
+        cliente.setCidade("São Paulo");
         cliente.setEnd("End");
-        cliente.setEstado("BA");
+        cliente.setEstado("SP");
         cliente.setNumero(10);
-        cliente.setTel(77999999999L);
+        cliente.setTel(1199999999L);
+
     }
 
     @Test
-    public void pesquisarCliente(){
+    public void pesquisarCliente() {
         Cliente clienteConsultado = clienteService.buscarPorCPF(cliente.getCpf());
         Assert.assertNotNull(clienteConsultado);
     }
+
     @Test
-    public void salvarCliente(){
-        Boolean retorno = clienteService.salvar(cliente);
+    public void salvarCliente() throws TipoChaveNaoEncontradaException {
+        Boolean retorno = clienteService.cadastrar(cliente);
+
         Assert.assertTrue(retorno);
     }
+
     @Test
-    public void excluirCliente(){
+    public void excluirCliente() {
         clienteService.excluir(cliente.getCpf());
-        //Assert.assertTrue(retorno);
     }
+
     @Test
-    public void alterarCliente(){
-        cliente.setNome("Rodrigo");
+    public void alterarCliente() throws TipoChaveNaoEncontradaException {
+        cliente.setNome("Rodrigo Pires");
         clienteService.alterar(cliente);
-        Assert.assertEquals("Rodrigo", cliente.getNome());
+
+        Assert.assertEquals("Rodrigo Pires", cliente.getNome());
     }
 }

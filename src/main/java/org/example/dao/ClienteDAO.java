@@ -1,25 +1,31 @@
 package org.example.dao;
 
+import org.example.dao.generic.GenericDAO;
 import org.example.domain.Cliente;
 
-public class ClienteDAO implements IClienteDAO{
-    @Override
-    public Boolean salvar(Cliente cliente) {
-        return true;
+public class ClienteDAO extends GenericDAO<Cliente, Long> implements IClienteDAO {
+
+    public ClienteDAO() {
+        super();
     }
 
     @Override
-    public Cliente buscarPorCPF(Long cpf) {
-        return null;
+    public Class<Cliente> getTipoClasse() {
+        return Cliente.class;
     }
 
     @Override
-    public void excluir(Long cpf) {
+    public void atualiarDados(Cliente entity, Cliente entityCadastrado) {
+        entityCadastrado.setCidade(entity.getCidade());
+        entityCadastrado.setCpf(entity.getCpf());
+        entityCadastrado.setEnd(entity.getEnd());
+        entityCadastrado.setEstado(entity.getEstado());
+        entityCadastrado.setNome(entity.getNome());
+        entityCadastrado.setNumero(entity.getNumero());
+        entityCadastrado.setTel(entity.getTel());
 
     }
 
-    @Override
-    public void alterar(Cliente cliente) {
 
-    }
+
 }

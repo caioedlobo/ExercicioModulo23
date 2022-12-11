@@ -1,14 +1,16 @@
 package org.example.service;
 
 import org.example.domain.Cliente;
+import org.example.exceptions.TipoChaveNaoEncontradaException;
 
 public interface IClienteService {
 
-    Boolean salvar(Cliente cliente);
+    Boolean cadastrar(Cliente cliente) throws TipoChaveNaoEncontradaException;
 
     Cliente buscarPorCPF(Long cpf);
 
     void excluir(Long cpf);
 
-    void alterar(Cliente cliente);
+    void alterar(Cliente cliente) throws TipoChaveNaoEncontradaException;
+
 }
