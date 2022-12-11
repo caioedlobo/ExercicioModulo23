@@ -9,4 +9,6 @@ public interface IClienteService {
     Cliente buscarPorCPF(Long cpf);
 
     void excluir(Long cpf);
+
+    void alterar(Cliente cliente);
 }

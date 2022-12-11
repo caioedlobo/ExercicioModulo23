@@ -44,4 +44,10 @@ public class ClienteDAOTest {
         clienteDao.excluir(cliente.getCpf());
         //Assert.assertTrue(retorno);
     }
+    @Test
+    public void alterarCliente(){
+        cliente.setNome("Rodrigo");
+        clienteDao.alterar(cliente);
+        Assert.assertEquals("Rodrigo", cliente.getNome());
+    }
 }
