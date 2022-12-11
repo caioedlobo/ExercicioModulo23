@@ -175,7 +175,6 @@ public class VendaDAOTest {
         assertTrue(venda.getValorTotal().equals(BigDecimal.valueOf(20)));
         assertTrue(venda.getStatus().equals(Venda.Status.INICIADA));
     }
-
     @Test
     public void removerTodosProdutos() throws TipoChaveNaoEncontradaException {
         String codigoVenda = "A9";
